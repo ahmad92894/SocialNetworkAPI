@@ -11,10 +11,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      validate: {
-        validator: () => Promise.resolve(false),
-        message: 'Email validation failed'
-      }
+    //   validate: {
+    //     validator: () => Promise.resolve(false),
+    //     message: 'Email validation failed'
+    // }
       
     },
     thoughts:{
@@ -30,15 +30,15 @@ const userSchema = new Schema(
   },
   {
     toJSON: {
-      getters: true,
+      virtuals: true,
     },
     id: false
 }
 );
-userSchema
-.virtual('friendCount').get(function(){
-    return this.friends.length;
-});
+// userSchema
+// // .virtual('friendCount').get(function(){
+// //     return this.friends.length;
+// });
 
 
 const User = model('user', userSchema);
