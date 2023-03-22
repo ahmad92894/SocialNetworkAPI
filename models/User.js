@@ -11,22 +11,19 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-    //   validate: {
-    //     validator: () => Promise.resolve(false),
-    //     message: 'Email validation failed'
-    // }
+    
       
     },
-    thoughts:{
+    thoughts:[{
         type: Schema.Types.ObjectId,
         ref:'thought'
-    },
-    friends:{
+    }],
+    friends:[{
         type: Schema.Types.ObjectId,
         ref:'user'
 
-    },
-    // friends: [friendCount],
+    }],
+  
   },
   {
     toJSON: {
@@ -35,10 +32,9 @@ const userSchema = new Schema(
     id: false
 }
 );
-// userSchema
-// // .virtual('friendCount').get(function(){
-// //     return this.friends.length;
-// });
+userSchema.virtual('friendcount').get(function(){
+    return this.friends.length;
+});
 
 
 const User = model('user', userSchema);
